@@ -15,7 +15,4 @@ public class E2EInitializer {
 			return testObjArray;	
 
 	}
-	
-	
-
 }

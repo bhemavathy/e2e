@@ -59,9 +59,9 @@ public class ReadExcelUtility {
 		try {
 			 // The class loader that loaded the class
 	        ClassLoader classLoader = getClass().getClassLoader();
-	        InputStream ExcelFile = classLoader.getResourceAsStream("/testdata/emptestdata.xlsx");
+	        InputStream ExcelFile1 = classLoader.getResourceAsStream("/testdata/emptestdata.xlsx");
 	        
-			//FileInputStream ExcelFile = new FileInputStream(inputStream);
+			FileInputStream ExcelFile = new FileInputStream(FilePath);
 
 			// Access the required test data sheet
 
