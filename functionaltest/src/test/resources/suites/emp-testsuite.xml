@@ -1,0 +1,10 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name = "EmployeeTestSuite">
+  <test name = "empe2e">
+      <classes>
+         <class name = "com.employee.test.e2e.functionaltest.EmployeE2ETest" />
+      </classes>
+   </test>
+</suite> 
