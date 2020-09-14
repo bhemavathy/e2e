@@ -9,26 +9,27 @@ Employee Functional test End to end API testing <br>
 	Delete employees api -  http://dummy.restapiexample.com/api/v1/delete/1 <br>
 
 	src/main/java
+	       com.employee.e2e
+	       			Constants
+				EndPointEnum
+				HttpEnum
 		com.employee.e2e
 				models
-						Employee
+				    Employee
 		com.employee.e2e
 				utils 	
 				    RestApiUtils
 				    ExcelReadutility
 				    ReportGenerationUtils
 		com.employee.e2e
-		        init
-                  E2EInitializer
+		       		init
+                    		    E2EInitializer
     src/test/java
-        com.employee.test.e2e.functionaltest
-        	     EmployeE2ETest
-    
-
-
-    src/test/resources
+        	com.employee.test.e2e.functionaltest
+        	     		    EmployeE2ETest
+     src/test/resources
     		testdata
-    				emptestdata.xlsx
+    			emptestdata.xlsx
     		suites
     			employee2etest.xml
 
