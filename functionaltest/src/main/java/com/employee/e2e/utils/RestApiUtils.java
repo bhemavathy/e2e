@@ -2,6 +2,7 @@ package com.employee.e2e.utils;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
 
 import io.restassured.*;
 import io.restassured.specification.RequestSpecification;
@@ -14,72 +15,92 @@ import com.employee.e2e.constants.HttpEnum;
 import com.employee.e2e.models.*;
 
 import org.json.JSONObject;
+import org.testng.Assert;
 
- 
 public class RestApiUtils {
-	 RequestSpecification httpRequest ;
-	
+	RequestSpecification httpRequest;
+
 	public RestApiUtils(String uri) {
 		RestAssured.baseURI = uri;
 		httpRequest = RestAssured.given();
 	}
-	
-	public Response callRest(HttpEnum httpMethod,String reqParams,EndPointsEnum apiEndPoint){
-		
-		switch(httpMethod){
-		case  GET :
-			return callGetRequest(reqParams,apiEndPoint);
-		case  POST :
-			callPostRequest();
-		case  PUT :
-			callPutRequest();
-		case  PATCH :
-			callPatchRequest();
+
+	public Response callRest(HttpEnum httpMethod,
+			Map<String, String> reqParams, EndPointsEnum apiEndPoint) {
+
+		switch (httpMethod) {
+		case GET:
+			return callGetRequest(reqParams, apiEndPoint);
+		case POST:
+			return callPostRequest(reqParams, apiEndPoint);
+		case PUT:
+			return callPutRequest(reqParams, apiEndPoint);
+		case PATCH:
+			return callPatchRequest(reqParams, apiEndPoint);
+		case DELETE:
+			return callDeleteRequest(reqParams, apiEndPoint);
 		default:
 			return null;
-		}	
-	}
-		
-	private void callPatchRequest() {
-		// TODO Auto-generated method stub
-		
+		}
 	}
 
-	private void callPutRequest() {
-		// TODO Auto-generated method stub
-
+	private Response callDeleteRequest(Map<String, String> reqParams,
+			EndPointsEnum apiEndPoint) {
+		Response response = httpRequest.delete(apiEndPoint.getUrl()
+				+ reqParams.get("id"));
+		return response;
 	}
 
-	private void callPostRequest() {
-		RestAssured.baseURI = "http://dummy.restapiexample.com";
-		RequestSpecification httpRequest = RestAssured.given();
+	private Response callPatchRequest(Map<String, String> reqParams,
+			EndPointsEnum apiEndPoint) {
+		return null;
+	}
+
+	private Response callPutRequest(Map<String, String> reqParams,
+			EndPointsEnum apiEndPoint) {
+		// create json objects to send the parameters
 		JSONObject requestParams = new JSONObject();
-
-		requestParams.put("name", "konggk3");
-		requestParams.put("salary", 45121);
-		requestParams.put("age", 27);
+		requestParams.put("name", reqParams.get("name"));
+		requestParams.put("salary", reqParams.get("salary"));
+		requestParams.put("age", reqParams.get("age"));
 
 		httpRequest.header("Content-Type", "application/json");
 		httpRequest.body(requestParams.toString());
-		Response createResponse = httpRequest.post("/api/v1/create");
-
-		String responseBody = createResponse.getBody().asString();
-		System.out.println("Response Body is =>  " + responseBody);
-		System.out.println(createResponse.contentType());
-		JsonPath jsonPath = createResponse.jsonPath();
-		
+		Response response = httpRequest.put(apiEndPoint.getUrl()
+				+ reqParams.get("id"));
+		// String responseBody = response.getBody().asString();
+		// System.out.println("Response Body is =>  " + responseBody);
+		return response;
 	}
 
-	private Response callGetRequest(String reqParams, EndPointsEnum apiEndPoint) {
-		Response getResponse = null ;
-		try {			
+	private Response callPostRequest(Map<String, String> reqParams,
+			EndPointsEnum apiEndPoint) {
+
+		JSONObject requestParams = new JSONObject();
+		requestParams.put("name", reqParams.get("name"));
+		requestParams.put("salary", reqParams.get("salary"));
+		requestParams.put("age", reqParams.get("age"));
+
+		httpRequest.header("Content-Type", "application/json");
+		httpRequest.body(requestParams.toString());
+		Response createResponse = httpRequest.post(apiEndPoint.getUrl());
+
+		// String responseBody = createResponse.getBody().asString();
+		// System.out.println("Response Body is =>  " + responseBody);
+		return createResponse;
+	}
+
+	private Response callGetRequest(Map<String, String> reqParams,
+			EndPointsEnum apiEndPoint) {
+		Response getResponse = null;
+		try {
 			getResponse = httpRequest.get(apiEndPoint.getUrl());
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return getResponse;
-	} 
+	}
 
 }

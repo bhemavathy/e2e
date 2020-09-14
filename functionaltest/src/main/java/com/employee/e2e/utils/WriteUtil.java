@@ -11,7 +11,7 @@ public class WriteUtil {
 	
 	public static void writeHeader(File filename ,String output ) throws IOException{
 		FileWriter fw = new FileWriter(filename.getAbsoluteFile(),true);
-		System.out.println("file abs path " +  filename.getAbsoluteFile());
+		//System.out.println("file abs path " +  filename.getAbsoluteFile());
 		BufferedWriter bw = new  BufferedWriter(fw);
 		bw.write("<b><p style=\"font-size:24px;font-family:Calibiri\">" + output + "</b></p>");
 		bw.close();

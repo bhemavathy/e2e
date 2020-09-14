@@ -4,5 +4,6 @@ public enum HttpEnum {
 	GET,
 	PUT,
 	POST,
-	PATCH;
+	PATCH,
+	DELETE;
 }
