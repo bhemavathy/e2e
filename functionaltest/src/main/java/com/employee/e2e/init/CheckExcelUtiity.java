@@ -5,6 +5,7 @@ import io.github.millij.poi.ss.reader.XlsReader;
 import io.github.millij.poi.ss.reader.XlsxReader;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +16,17 @@ public class CheckExcelUtiity {
 	
 	public Object[][] loadEmployeeDetails() throws Exception {
 		
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		InputStream is = loader.getResourceAsStream("testdata/employeetestdata.xlsx");
+		
+		System.out.println("Stream " + is.available());
+		
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("emptestdata.xlsx").getFile());
 		System.out.println(file.getAbsolutePath());
 		
 		ReadExcelUtility resdExcelUtility = new ReadExcelUtility();
-		Object[][] testObjArray = resdExcelUtility.getTableArray("/testdata/emptestdata.xlsx",
-				"Sheet1");
+		Object[][] testObjArray = resdExcelUtility.getTableArray("/testdata/emptestdata.xlsx","Sheet1");
 		
 		Employee emp = new Employee();
 		//emp.setName(testObjArray[0][3]);

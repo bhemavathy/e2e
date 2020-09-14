@@ -7,15 +7,15 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.employee.e2e.init.Constant;
+import com.employee.e2e.constants.Constant;
+import com.employee.e2e.constants.EndPointsEnum;
+import com.employee.e2e.constants.HttpEnum;
 import com.employee.e2e.init.E2EInitializer;
 import com.employee.e2e.models.Employee;
-import com.employee.e2e.models.EndPointsEnum;
-import com.employee.e2e.models.HttpEnum;
 import com.employee.e2e.utils.ReadExcelUtility;
 import com.employee.e2e.utils.RestApiUtils;
 
-public class EmployeE2ETest {
+public class EmployeE2ETest extends E2EInitializer{
 	
 	@Test(dataProvider = "loadEmployeeDetails" ,dataProviderClass=E2EInitializer.class)
 	public void e2eEmployeeTest(String testCaseName,String id,String name,String age,String salary){

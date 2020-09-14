@@ -12,7 +12,9 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.employee.e2e.init.Constant;
+import com.employee.e2e.constants.Constant;
+
+
 
 public class ReadExcelUtility {
 
@@ -52,20 +54,21 @@ public class ReadExcelUtility {
 	// This method is to read the test data from the Excel cell, in this we are
 	// passing parameters as Row num and Col num
 
-	public  Object[][] getTableArray(String FilePath, String SheetName) throws Exception {
+	public  Object[][] getTableArray(String filePath , String SheetName) throws Exception {
 
 		String[][] tabArray = null;
 
 		try {
 			 // The class loader that loaded the class
-	        ClassLoader classLoader = getClass().getClassLoader();
-	        InputStream ExcelFile1 = classLoader.getResourceAsStream("/testdata/emptestdata.xlsx");
 	        
-			FileInputStream ExcelFile = new FileInputStream(FilePath);
-
+			ClassLoader loader = Thread.currentThread().getContextClassLoader();
+			//InputStream excelInputStream = loader.getResourceAsStream("testdata/employeetestdata.xlsx");
+			InputStream excelInputStream = loader.getResourceAsStream(filePath);
+	        
+			//FileInputStream ExcelFile = new FileInputStream(inputStream);
 			// Access the required test data sheet
 
-			ExcelWBook = new XSSFWorkbook(ExcelFile);
+			ExcelWBook = new XSSFWorkbook(excelInputStream);
 			ExcelWSheet = ExcelWBook.getSheet(SheetName);
 
 			int startRow = 1;

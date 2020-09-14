@@ -9,6 +9,8 @@ import io.restassured.http.Method;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
+import com.employee.e2e.constants.EndPointsEnum;
+import com.employee.e2e.constants.HttpEnum;
 import com.employee.e2e.models.*;
 
 import org.json.JSONObject;
